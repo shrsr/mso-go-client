@@ -13,13 +13,13 @@ import (
 	"strings"
 	"time"
 
-	"github.com/CiscoDevNet/mso-go-client/container"
+	"github.com/ciscoecosystem/mso-go-client/container"
 )
 
 const authPayload = `{
 	
-	"username": "admin",
-	"password": "ins3965!ins3965!"
+	"username": "%s",
+	"password": "%s"
 
 }`
 
