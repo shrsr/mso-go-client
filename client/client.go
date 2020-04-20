@@ -177,7 +177,7 @@ func (c *Client) Authenticate() error {
 		return errors.New("Empty response")
 	}
 
-	token := obj.S("imdata").Index(0).S("login", "attributes", "token").String()
+	token := obj.S("token").String()
 
 	if token == "" {
 		return errors.New("Invalid Username or Password")
