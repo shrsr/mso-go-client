@@ -134,7 +134,7 @@ func (c *Client) MakeRestRequest(method string, path string, body *container.Con
 
 	fURL := c.BaseURL.ResolveReference(url)
 	var req *http.Request
-	if method == "GET" {
+	if method == "GET" || method == "DELETE" {
 		req, err = http.NewRequest(method, fURL.String(), nil)
 	} else {
 		req, err = http.NewRequest(method, fURL.String(), bytes.NewBuffer((body.Bytes())))
