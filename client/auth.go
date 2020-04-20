@@ -8,11 +8,8 @@ import (
 )
 
 type Auth struct {
-	Token         string
-	Expiry        time.Time
-	apicCreatedAt time.Time
-	realCreatedAt time.Time
-	offset        int64
+	Token  string
+	Expiry time.Time
 }
 
 func (au *Auth) IsValid() bool {
@@ -23,15 +20,11 @@ func (au *Auth) IsValid() bool {
 }
 
 func (t *Auth) CalculateExpiry(willExpire int64) {
-	t.Expiry = time.Unix((t.apicCreatedAt.Unix() + willExpire), 0)
-}
-
-func (t *Auth) CaclulateOffset() {
-	t.offset = t.apicCreatedAt.Unix() - t.realCreatedAt.Unix()
+	t.Expiry = time.Unix((time.Now().Unix() + willExpire), 0)
 }
 
 func (t *Auth) estimateExpireTime() int64 {
-	return time.Now().Unix() + t.offset
+	return time.Now().Unix() + 3
 }
 
 func (client *Client) InjectAuthenticationHeader(req *http.Request, path string) (*http.Request, error) {

@@ -11,7 +11,6 @@ import (
 	"net/url"
 	"strconv"
 	"strings"
-	"time"
 
 	"github.com/ciscoecosystem/mso-go-client/container"
 )
@@ -160,7 +159,7 @@ func (c *Client) MakeRestRequest(method string, path string, body *container.Con
 // Authenticate is used to
 func (c *Client) Authenticate() error {
 	method := "POST"
-	path := "/api/v1/auth/login.json"
+	path := "/api/v1/auth/login"
 	body, err := container.ParseJSON([]byte(fmt.Sprintf(authPayload, c.username, c.password)))
 
 	if err != nil {
@@ -179,17 +178,7 @@ func (c *Client) Authenticate() error {
 	}
 
 	token := obj.S("imdata").Index(0).S("login", "attributes", "token").String()
-	creationTimeStr := stripQuotes(obj.S("imdata").Index(0).S("login", "attributes", "creationTime").String())
-	refreshTimeStr := stripQuotes(obj.S("imdata").Index(0).S("login", "attributes", "refreshTimeoutSeconds").String())
 
-	creationTimeInt, err := StrtoInt(creationTimeStr, 10, 64)
-	if err != nil {
-		return err
-	}
-	refreshTimeInt, err := StrtoInt(refreshTimeStr, 10, 64)
-	if err != nil {
-		return err
-	}
 	if token == "" {
 		return errors.New("Invalid Username or Password")
 	}
@@ -198,10 +187,7 @@ func (c *Client) Authenticate() error {
 		c.AuthToken = &Auth{}
 	}
 	c.AuthToken.Token = stripQuotes(token)
-	c.AuthToken.apicCreatedAt = time.Unix(creationTimeInt, 0)
-	c.AuthToken.realCreatedAt = time.Now()
-	c.AuthToken.CalculateExpiry(refreshTimeInt)
-	c.AuthToken.CaclulateOffset()
+	c.AuthToken.CalculateExpiry(1200) //refreshTime=1200 Sec
 
 	return nil
 }
