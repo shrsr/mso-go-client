@@ -36,8 +36,6 @@ func (c *Client) Save(url string, obj models.Model) (*container.Container, error
 	if err != nil {
 		return nil, err
 	}
-	fmt.Println(c)
-	fmt.Println(jsonPayload.String())
 	req, err := c.MakeRestRequest("POST", url, jsonPayload, true)
 	if err != nil {
 		return nil, err
@@ -85,8 +83,6 @@ func (c *Client) PatchbyID(url string, obj models.Model) (*container.Container, 
 	if err != nil {
 		return nil, err
 	}
-	fmt.Println(c)
-	fmt.Println(jsonPayload.String())
 	req, err := c.MakeRestRequest("PATCH", url, jsonPayload, true)
 	if err != nil {
 		return nil, err
