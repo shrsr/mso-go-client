@@ -11,8 +11,7 @@ import (
 
 func (c *Client) GetViaURL(endpoint string) (*container.Container, error) {
 
-	url := fmt.Sprintf("%s%s", BaseURL, endpoint)
-	req, err := c.MakeRestRequest("GET", url, nil, true)
+	req, err := c.MakeRestRequest("GET", endpoint, nil, true)
 
 	if err != nil {
 		return nil, err
@@ -38,8 +37,7 @@ func (c *Client) Save(endpoint string, obj models.Model) (*container.Container, 
 	if err != nil {
 		return nil, err
 	}
-	url := fmt.Sprintf("%s%s", BaseURL, endpoint)
-	req, err := c.MakeRestRequest("POST", url, jsonPayload, true)
+	req, err := c.MakeRestRequest("POST", endpoint, jsonPayload, true)
 	if err != nil {
 		return nil, err
 	}
@@ -86,8 +84,7 @@ func (c *Client) PatchbyID(endpoint string, obj models.Model) (*container.Contai
 	if err != nil {
 		return nil, err
 	}
-	url := fmt.Sprintf("%s%s", BaseURL, endpoint)
-	req, err := c.MakeRestRequest("PATCH", url, jsonPayload, true)
+	req, err := c.MakeRestRequest("PATCH", endpoint, jsonPayload, true)
 	if err != nil {
 		return nil, err
 	}
