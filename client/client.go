@@ -22,6 +22,8 @@ const authPayload = `{
 
 }`
 
+const BaseURL = "https://173.36.219.193/"
+
 // Client is the main entry point
 type Client struct {
 	BaseURL *url.URL
@@ -170,12 +172,15 @@ func (c *Client) Authenticate() error {
 	req, err := c.MakeRestRequest(method, path, body, false)
 	obj, _, err := c.Do(req)
 
+	log.Println("OBJECTTTTTTTTTTTTT: %s", obj)
+
 	if err != nil {
 		return err
 	}
 	if obj == nil {
 		return errors.New("Empty response")
 	}
+	req.Header.Set("Content-Type", "application/json")
 
 	token := obj.S("token").String()
 

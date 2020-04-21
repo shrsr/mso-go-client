@@ -9,7 +9,9 @@ import (
 	"github.com/ciscoecosystem/mso-go-client/models"
 )
 
-func (c *Client) GetViaURL(url string) (*container.Container, error) {
+func (c *Client) GetViaURL(endpoint string) (*container.Container, error) {
+
+	url := fmt.Sprintf("%s%s", BaseURL, endpoint)
 	req, err := c.MakeRestRequest("GET", url, nil, true)
 
 	if err != nil {
@@ -29,13 +31,14 @@ func (c *Client) GetViaURL(url string) (*container.Container, error) {
 
 }
 
-func (c *Client) Save(url string, obj models.Model) (*container.Container, error) {
+func (c *Client) Save(endpoint string, obj models.Model) (*container.Container, error) {
 
 	jsonPayload, err := c.PrepareModel(obj)
 
 	if err != nil {
 		return nil, err
 	}
+	url := fmt.Sprintf("%s%s", BaseURL, endpoint)
 	req, err := c.MakeRestRequest("POST", url, jsonPayload, true)
 	if err != nil {
 		return nil, err
@@ -76,13 +79,14 @@ func (c *Client) DeletebyId(url string) error {
 	return nil
 }
 
-func (c *Client) PatchbyID(url string, obj models.Model) (*container.Container, error) {
+func (c *Client) PatchbyID(endpoint string, obj models.Model) (*container.Container, error) {
 
 	jsonPayload, err := c.PrepareModel(obj)
 
 	if err != nil {
 		return nil, err
 	}
+	url := fmt.Sprintf("%s%s", BaseURL, endpoint)
 	req, err := c.MakeRestRequest("PATCH", url, jsonPayload, true)
 	if err != nil {
 		return nil, err
