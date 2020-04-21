@@ -7,9 +7,9 @@ import (
 	"github.com/ciscoecosystem/mso-go-client/container"
 )
 
-func toStringMap(intf interface{}) map[string]string {
+func toStringMap(intf interface{}) map[string]interface{} {
 
-	result := make(map[string]string)
+	result := make(map[string]interface{})
 	temp := intf.(map[string]interface{})
 
 	for key, value := range temp {
@@ -48,7 +48,7 @@ func StringToBool(value string) bool {
 	return false
 }
 
-func A(data map[string]string, key, value string) {
+func A(data map[string]interface{}, key string , value interface{}) {
 
 	if value != "" {
 		data[key] = value
