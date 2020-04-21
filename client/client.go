@@ -142,6 +142,7 @@ func (c *Client) MakeRestRequest(method string, path string, body *container.Con
 	if err != nil {
 		return nil, err
 	}
+	req.Header.Set("Content-Type", "application/json")
 	log.Printf("HTTP request %s %s %v", method, path, req)
 
 	if authenticated {
@@ -166,7 +167,7 @@ func (c *Client) Authenticate() error {
 		return err
 	}
 
-	fmt.Println(body.String())
+	log.Printf("bodyyyy %s", body.String())
 	req, err := c.MakeRestRequest(method, path, body, false)
 	obj, _, err := c.Do(req)
 
