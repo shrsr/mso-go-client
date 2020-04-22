@@ -19,10 +19,7 @@ const authPayload = `{
 	
 	"username": "%s",
 	"password": "%s"
-
 }`
-
-const BaseURL = "https://173.36.219.193/"
 
 // Client is the main entry point
 type Client struct {
