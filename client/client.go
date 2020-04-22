@@ -212,15 +212,19 @@ func (c *Client) Do(req *http.Request) (*container.Container, *http.Response, er
 	bodyStr := string(bodyBytes)
 	resp.Body.Close()
 	log.Printf("\n HTTP response unique string %s %s %s", req.Method, req.URL.String(), bodyStr)
-	obj, err := container.ParseJSON(bodyBytes)
+	if req.Method != "DELETE" {
+		obj, err := container.ParseJSON(bodyBytes)
 
-	if err != nil {
-		fmt.Println("Error occurred.")
-		log.Printf("Error occured while json parsing %+v", err)
+		if err != nil {
+			fmt.Println("Error occurred.")
+			log.Printf("Error occured while json parsing %+v", err)
+			return nil, resp, err
+		}
+		log.Printf("[DEBUG] Exit from do method")
+		return obj, resp, err
+	} else {
 		return nil, resp, err
 	}
-	log.Printf("[DEBUG] Exit from do method")
-	return obj, resp, err
 
 }
 

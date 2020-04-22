@@ -30,6 +30,25 @@ func (c *Client) GetViaURL(endpoint string) (*container.Container, error) {
 
 }
 
+func (c *Client) Put(endpoint string, obj models.Model) (*container.Container, error) {
+	jsonPayload, err := c.PrepareModel(obj)
+
+	if err != nil {
+		return nil, err
+	}
+	req, err := c.MakeRestRequest("PUT", endpoint, jsonPayload, true)
+	if err != nil {
+		return nil, err
+	}
+
+	cont, _, err := c.Do(req)
+	if err != nil {
+		return nil, err
+	}
+
+	return cont, CheckForErrors(cont, "PUT")
+}
+
 func (c *Client) Save(endpoint string, obj models.Model) (*container.Container, error) {
 
 	jsonPayload, err := c.PrepareModel(obj)
@@ -70,10 +89,16 @@ func (c *Client) DeletebyId(url string) error {
 		return err
 	}
 
-	_, _, err1 := c.Do(req)
+	_, resp, err1 := c.Do(req)
 	if err1 != nil {
 		return err1
 	}
+	if resp.StatusCode == 204 {
+		return nil
+	} else {
+		return fmt.Errorf("Unable to delete the object")
+	}
+
 	return nil
 }
 
