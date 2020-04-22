@@ -1,33 +1,39 @@
 package models
 
 type SchemaAttributes struct {
-	
-	
 	Schema string `json:",omitempty"`
-	
-	Templates []string `json:",omitempty"`
-	
-    Sites      []string  `json:",omitempty"`
-	
-    
+
+	Templates []interface{} `json:",omitempty"`
+
+	Sites []string `json:",omitempty"`
 }
 
-
+type Templates struct {
+	Name          string   `json:",omitempty"`
+	TenantId      string   `json:",omitempty"`
+	DisplayName   string   `json:",omitempty"`
+	Anps          []string `json:",omitempty"`
+	Contracts     []string `json:",omitempty"`
+	Vrfs          []string `json:",omitempty"`
+	Bds           []string `json:",omitempty"`
+	Filter        []string `json:",omitempty"`
+	ExternalEpgs  []string `json:",omitempty"`
+	ServiceGraphs []string `json:",omitempty"`
+}
 
 func NewSchemacontainer(schemaAttr SchemaAttributes) *SchemaAttributes {
-	
-	    SchemacontainerAttributes:= schemaAttr
-		return &SchemacontainerAttributes
+
+	SchemacontainerAttributes := schemaAttr
+	return &SchemacontainerAttributes
 }
 
-   
 func (schemaAttributes *SchemaAttributes) ToMap() (map[string]interface{}, error) {
-schemaAttributeMap :=make(map[string]interface{})
- A(schemaAttributeMap, "schema",schemaAttributes.Schema)
-A(schemaAttributeMap, "templates",schemaAttributes.Templates)
-A(schemaAttributeMap, "sites",schemaAttributes.Sites)
-	
-    return schemaAttributeMap, nil
+	schemaAttributeMap := make(map[string]interface{})
+	A(schemaAttributeMap, "displayName", schemaAttributes.Schema)
+	A(schemaAttributeMap, "templates", schemaAttributes.Templates)
+	A(schemaAttributeMap, "sites", schemaAttributes.Sites)
+
+	return schemaAttributeMap, nil
 }
 
 // func TenantFromContainerList(cont *container.Container, index int) *Tenant {
@@ -41,22 +47,17 @@ A(schemaAttributeMap, "sites",schemaAttributes.Sites)
 // 			ClassName:         FvtenantClassName,
 // 			Rn:                G(TenantCont, "rn"),
 // 		},
-        
+
 // 		TenantAttributes{
-		
-		
+
 // 			Name : G(TenantCont, "name"),
-		
-		
-        
+
 // 	        Annotation : G(TenantCont, "annotation"),
-		
-        
+
 // 	        NameAlias : G(TenantCont, "nameAlias"),
-		
-        		
+
 //         },
-        
+
 // 	}
 // }
 
