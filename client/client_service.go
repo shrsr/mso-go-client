@@ -3,7 +3,6 @@ package client
 import (
 	"errors"
 	"fmt"
-	"log"
 
 	"github.com/ciscoecosystem/mso-go-client/container"
 	"github.com/ciscoecosystem/mso-go-client/models"
@@ -18,7 +17,6 @@ func (c *Client) GetViaURL(endpoint string) (*container.Container, error) {
 	}
 
 	obj, _, err := c.Do(req)
-	log.Printf("Getvia url %+v", obj)
 	if err != nil {
 		return nil, err
 	}

@@ -1,7 +1,6 @@
 package tests
 
 import (
-	"log"
 	"testing"
 
 	"github.com/ciscoecosystem/mso-go-client/client"
@@ -18,7 +17,6 @@ func TestClientAuthenticate(t *testing.T) {
 	if client.AuthToken.Token == "{}" {
 		t.Error("Token is empty")
 	}
-	log.Printf("Token---- %s", client.AuthToken.Token)
 	t.Error("all wrong")
 }
 
