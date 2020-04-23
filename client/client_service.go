@@ -103,11 +103,13 @@ func (c *Client) DeletebyId(url string) error {
 func (c *Client) PatchbyID(endpoint string, obj models.Model) (*container.Container, error) {
 
 	jsonPayload, err := c.PrepareModel(obj)
-
+	contJs := container.New()
+	contJs.Array()
+	contJs.ArrayAppend(jsonPayload.Data())
 	if err != nil {
 		return nil, err
 	}
-	req, err := c.MakeRestRequest("PATCH", endpoint, jsonPayload, true)
+	req, err := c.MakeRestRequest("PATCH", endpoint, contJs, true)
 	if err != nil {
 		return nil, err
 	}
