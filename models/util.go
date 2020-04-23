@@ -48,13 +48,17 @@ func StringToBool(value string) bool {
 	return false
 }
 
-func A(data map[string]interface{}, key string , value interface{}) {
+func A(data map[string]interface{}, key string, value interface{}) {
 
 	if value != "" {
 		data[key] = value
 	}
 
 	if value == "{}" {
+		data[key] = ""
+	}
+
+	if value == nil {
 		data[key] = ""
 	}
 }
