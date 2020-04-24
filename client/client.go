@@ -201,7 +201,6 @@ func (c *Client) Do(req *http.Request) (*container.Container, *http.Response, er
 	if err != nil {
 		return nil, nil, err
 	}
-	log.Printf("\n\n\n HTTP request: %v", req.Body)
 	log.Printf("\nHTTP Request: %s %s", req.Method, req.URL.String())
 	log.Printf("nHTTP Response: %d %s %v", resp.StatusCode, resp.Status, resp)
 
