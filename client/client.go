@@ -12,6 +12,7 @@ import (
 	"strconv"
 	"strings"
 
+	"github.com/ciscoecosystem/aci-go-client/models"
 	"github.com/ciscoecosystem/mso-go-client/container"
 )
 
@@ -142,7 +143,7 @@ func (c *Client) MakeRestRequest(method string, path string, body *container.Con
 		return nil, err
 	}
 	req.Header.Set("Content-Type", "application/json")
-	log.Printf("HTTP request %s %s %v", method, path, req)
+	log.Printf("HTTP request %s %s", method, path)
 
 	if authenticated {
 
@@ -151,7 +152,7 @@ func (c *Client) MakeRestRequest(method string, path string, body *container.Con
 			return req, err
 		}
 	}
-	log.Printf("HTTP request after injection %s %s %v", method, path, req)
+	log.Printf("HTTP request after injection %s %s", method, path)
 
 	return req, nil
 }
@@ -177,9 +178,9 @@ func (c *Client) Authenticate() error {
 	}
 	req.Header.Set("Content-Type", "application/json")
 
-	token := obj.S("token").String()
+	token := models.StripQuotes(obj.S("token").String())
 
-	if token == "" {
+	if token == "" || token == "{}" {
 		return errors.New("Invalid Username or Password")
 	}
 

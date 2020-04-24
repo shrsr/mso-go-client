@@ -72,7 +72,7 @@ func CheckForErrors(cont *container.Container, method string) error {
 
 	if cont.Exists("code") && cont.Exists("message") {
 
-		return errors.New(fmt.Sprintf("%s", cont.S("message")))
+		return errors.New(fmt.Sprintf("%s%s", cont.S("message"), cont.S("info")))
 	} else {
 		return nil
 	}
