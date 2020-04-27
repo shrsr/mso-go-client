@@ -36,7 +36,6 @@ func (client *Client) InjectAuthenticationHeader(req *http.Request, path string)
 		if err != nil {
 			return nil, err
 		}
-		log.Print(client.AuthToken.Token)
 		req.Header.Set("Content-Type", "application/json")
 		req.Header.Set("Authorization", fmt.Sprintf("Bearer %s", client.AuthToken.Token))
 

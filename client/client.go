@@ -170,8 +170,6 @@ func (c *Client) Authenticate() error {
 	req, err := c.MakeRestRequest(method, path, body, false)
 	obj, _, err := c.Do(req)
 
-	log.Println("OBJECTTTTTTTTTTTTT: %s", obj)
-
 	if err != nil {
 		return err
 	}
