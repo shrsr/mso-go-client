@@ -12,7 +12,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/ciscoecosystem/aci-go-client/models"
+	"github.com/ciscoecosystem/mso-go-client/models"
 	"github.com/ciscoecosystem/mso-go-client/container"
 )
 
