@@ -18,6 +18,15 @@ func NewTemplateBD(ops, path, name, displayName, layer2Unicast string, intersite
 		"l3MCast":                  l3MCast,
 		"vrfRef":                   vrfRef,
 		"dhcpLabel":                dhcpLabel,
+		"subnets":                  []interface{}{},
+	}
+
+	if bdMap["l2UnknownUnicast"] == "" {
+		bdMap["l2UnknownUnicast"] = "flood"
+	}
+
+	if bdMap["dhcpLabel"] == nil {
+		delete(bdMap, "dhcpLabel")
 	}
 
 	return &TemplateBD{
@@ -26,4 +35,15 @@ func NewTemplateBD(ops, path, name, displayName, layer2Unicast string, intersite
 		Value: bdMap,
 	}
 
+}
+
+func (bdAttributes *TemplateBD) ToMap() (map[string]interface{}, error) {
+	bdAttributesMap := make(map[string]interface{})
+	A(bdAttributesMap, "op", bdAttributes.Ops)
+	A(bdAttributesMap, "path", bdAttributes.Path)
+	if bdAttributes.Value != nil {
+		A(bdAttributesMap, "value", bdAttributes.Value)
+	}
+
+	return bdAttributesMap, nil
 }

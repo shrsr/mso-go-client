@@ -12,8 +12,8 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/ciscoecosystem/mso-go-client/models"
 	"github.com/ciscoecosystem/mso-go-client/container"
+	"github.com/ciscoecosystem/mso-go-client/models"
 )
 
 const authPayload = `{
@@ -143,7 +143,7 @@ func (c *Client) MakeRestRequest(method string, path string, body *container.Con
 		return nil, err
 	}
 	req.Header.Set("Content-Type", "application/json")
-	log.Printf("HTTP request %s %s", method, path)
+	log.Printf("HTTP request %s %s %v", method, path, body)
 
 	if authenticated {
 
