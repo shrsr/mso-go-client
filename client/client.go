@@ -143,7 +143,7 @@ func (c *Client) MakeRestRequest(method string, path string, body *container.Con
 		return nil, err
 	}
 	req.Header.Set("Content-Type", "application/json")
-	log.Printf("HTTP request %s %s %v", method, path, body)
+	log.Printf("HTTP request %s %s", method, path)
 
 	if authenticated {
 
