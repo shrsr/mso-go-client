@@ -19,7 +19,7 @@ func NewTemplateContractFilter(ops, path, name, displayName, scope, filterType s
 		"filterRelationshipsConsumerToProvider": filterRelationshipsConsumerToProvider,
 	}
 
-	if contractMap["filterType"] == nil {
+	if contractMap["filterType"] == "" {
 		contractMap["filterType"] = "bothway"
 	}
 
