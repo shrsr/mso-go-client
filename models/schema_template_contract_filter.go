@@ -6,7 +6,7 @@ type TemplateContractFilter struct {
 	Value map[string]interface{} `json:",omitempty"`
 }
 
-func NewTemplateContractFilter(ops, path, name, displayName, scope, filterType string, contractRef map[string]interface{}, filterRelationships,filterRelationshipsProviderToConsumer,filterRelationshipsConsumerToProvider []interface{}) *TemplateContractFilter {
+func NewTemplateContractFilter(ops, path, name, displayName, scope, filterType string, filterRelationships,filterRelationshipsProviderToConsumer,filterRelationshipsConsumerToProvider []interface{}) *TemplateContractFilter {
 	var contractMap map[string]interface{}
 	if ops !="remove" {
 	contractMap = map[string]interface{}{
@@ -14,7 +14,6 @@ func NewTemplateContractFilter(ops, path, name, displayName, scope, filterType s
 		"displayName":                           displayName,
 		"scope":                                 scope,
 		"filterType":                            filterType,
-		"contractRef":                           contractRef,
 		"filterRelationships":                   filterRelationships,
 		"filterRelationshipsProviderToConsumer": filterRelationshipsProviderToConsumer,
 		"filterRelationshipsConsumerToProvider": filterRelationshipsConsumerToProvider,
