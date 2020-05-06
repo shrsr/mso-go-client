@@ -6,27 +6,27 @@ type TemplateContractFilter struct {
 	Value map[string]interface{} `json:",omitempty"`
 }
 
-func NewTemplateContractFilter(ops, path, name, displayName, scope, filterType string, filterRelationships,filterRelationshipsProviderToConsumer,filterRelationshipsConsumerToProvider []interface{}) *TemplateContractFilter {
+func NewTemplateContractFilter(ops, path, name, displayName, scope, filterType string, filterRelationships, filterRelationshipsProviderToConsumer, filterRelationshipsConsumerToProvider []interface{}) *TemplateContractFilter {
 	var contractMap map[string]interface{}
-	if ops !="remove" {
-	contractMap = map[string]interface{}{
-		"name":                                  name,
-		"displayName":                           displayName,
-		"scope":                                 scope,
-		"filterType":                            filterType,
-		"filterRelationships":                   filterRelationships,
-		"filterRelationshipsProviderToConsumer": filterRelationshipsProviderToConsumer,
-		"filterRelationshipsConsumerToProvider": filterRelationshipsConsumerToProvider,
-	}
+	if ops != "remove" {
+		contractMap = map[string]interface{}{
+			"name":                                  name,
+			"displayName":                           displayName,
+			"scope":                                 scope,
+			"filterType":                            filterType,
+			"filterRelationships":                   filterRelationships,
+			"filterRelationshipsProviderToConsumer": filterRelationshipsProviderToConsumer,
+			"filterRelationshipsConsumerToProvider": filterRelationshipsConsumerToProvider,
+		}
 
-	if contractMap["filterType"] == "" {
-		contractMap["filterType"] = "bothway"
-	}
+		if contractMap["filterType"] == "" {
+			contractMap["filterType"] = "bothWay"
+		}
 
-	if contractMap["scope"] == "" {
-		contractMap["scope"] = "context"
-	}
-	}else{
+		if contractMap["scope"] == "" {
+			contractMap["scope"] = "context"
+		}
+	} else {
 		contractMap = nil
 	}
 	return &TemplateContractFilter{

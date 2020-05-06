@@ -1,7 +1,5 @@
 package models
 
-import "log"
-
 type TemplateFilterEntry struct {
 	Ops   string                 `json:",omitempty"`
 	Path  string                 `json:",omitempty"`
@@ -51,7 +49,7 @@ func NewTemplateFilterEntry(ops, path, entryName, entryDisplayName, entryDescrip
 		anpepgMap["destinationFrom"]="unspecified"
 	}
 
-   log.Println("mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmap",anpepgMap)
+
 	return &TemplateFilterEntry{
 		Ops:   ops,
 		Path:  path,
