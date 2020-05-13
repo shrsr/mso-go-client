@@ -6,23 +6,14 @@ type SchemaSiteAnpEpgDomain struct {
 	Value map[string]interface{} `json:",omitempty"`
 }
 
-func NewSchemaSiteAnpEpgDomain(ops, path, domainType, dn, deploymentImmediacy, resolutionImmediacy, microSegVlanType, portEncapVlanType, vlanEncapMode, switchingMode, switchType, enhancedLagpolicyName, enhancedLagpolicyDn string, allowMicroSegmentation bool, microSegVlan, portEncapVlan int) *SchemaSiteAnpEpgDomain {
+func NewSchemaSiteAnpEpgDomain(ops, path, domainType, dn, deploymentImmediacy, resolutionImmediacy string, vmmDomainProperties map[string]interface{}) *SchemaSiteAnpEpgDomain {
 	var siteAnpEpgDomainMap map[string]interface{}
 	siteAnpEpgDomainMap = map[string]interface{}{
-		"domainType":             domainType,
-		"dn":                     dn,
-		"deploymentImmediacy":    deploymentImmediacy,
-		"resolutionImmediacy":    resolutionImmediacy,
-		"microSegVlanType":       microSegVlanType,
-		"portEncapVlanType":      portEncapVlanType,
-		"vlanEncapMode":          vlanEncapMode,
-		"switchingMode":          switchingMode,
-		"switchType":             switchType,
-		"enhancedLagpolicyName":  enhancedLagpolicyName,
-		"enhancedLagpolicyDn":    enhancedLagpolicyDn,
-		"allowMicroSegmentation": allowMicroSegmentation,
-		"microSegVlan":           microSegVlan,
-		"portEncapVlan":          portEncapVlan,
+		"domainType":          domainType,
+		"dn":                  dn,
+		"deploymentImmediacy": deploymentImmediacy,
+		"resolutionImmediacy": resolutionImmediacy,
+		"vmmDomainProperties": vmmDomainProperties,
 	}
 
 	return &SchemaSiteAnpEpgDomain{
