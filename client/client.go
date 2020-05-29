@@ -24,15 +24,14 @@ const authPayload = `{
 
 // Client is the main entry point
 type Client struct {
-	BaseURL *url.URL
-
+	BaseURL    *url.URL
 	httpClient *http.Client
 	AuthToken  *Auth
 	username   string
 	password   string
-
-	insecure bool
-	proxyUrl string
+	insecure   bool
+	proxyUrl   string
+	domain     string
 }
 
 // singleton implementation of a client
@@ -57,7 +56,11 @@ func ProxyUrl(pUrl string) Option {
 		client.proxyUrl = pUrl
 	}
 }
-
+func Domain(domain string) Option {
+	return func(clinet *Client) {
+		clinet.domain = domain
+	}
+}
 func initClient(clientUrl, username string, options ...Option) *Client {
 	var transport *http.Transport
 	bUrl, err := url.Parse(clientUrl)
@@ -162,7 +165,13 @@ func (c *Client) Authenticate() error {
 	method := "POST"
 	path := "/api/v1/auth/login"
 	body, err := container.ParseJSON([]byte(fmt.Sprintf(authPayload, c.username, c.password)))
-
+	if c.domain != "" {
+		domainId, err := c.GetDomainId(c.domain)
+		if err != nil {
+			return err
+		}
+		body.Set(domainId, "domainId")
+	}
 	if err != nil {
 		return err
 	}
@@ -191,6 +200,40 @@ func (c *Client) Authenticate() error {
 	c.AuthToken.CalculateExpiry(1200) //refreshTime=1200 Sec
 
 	return nil
+}
+
+func (c *Client) GetDomainId(domain string) (string, error) {
+	req, err := c.MakeRestRequest("GET", "/api/v1/auth/login-domains", nil, false)
+	if err != nil {
+		return "", err
+	}
+
+	obj, _, err := c.Do(req)
+
+	if err != nil {
+		return "", err
+	}
+	err = CheckForErrors(obj, "GET")
+	if err != nil {
+		return "", err
+	}
+	count, err := obj.ArrayCount("domains")
+	if err != nil {
+		return "", err
+	}
+
+	for i := 0; i < count; i++ {
+		domainCont, err := obj.ArrayElement(i, "domains")
+		if err != nil {
+			return "", err
+		}
+		domainName := models.StripQuotes(domainCont.S("name").String())
+
+		if domainName == domain {
+			return models.StripQuotes(domainCont.S("id").String()), nil
+		}
+	}
+	return "", fmt.Errorf("Unable to find domain id for domain %s", domain)
 }
 func StrtoInt(s string, startIndex int, bitSize int) (int64, error) {
 	return strconv.ParseInt(s, startIndex, bitSize)
