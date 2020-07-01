@@ -28,7 +28,7 @@ func (schematemplateanpepgusegattr *SchemaTemplateAnpEpgUsegAttr) ToMap() (map[s
 	A(schematemplateanpepgUsegAttrMap, "op", schematemplateanpepgusegattr.Ops)
 	A(schematemplateanpepgUsegAttrMap, "path", schematemplateanpepgusegattr.Path)
 	if schematemplateanpepgusegattr.Value != nil {
-		A(schematemplateanpepgUsegAttrMap, "value", schematemplateanpepgusegattr.Path)
+		A(schematemplateanpepgUsegAttrMap, "value", schematemplateanpepgusegattr.Value)
 	}
 
 	return schematemplateanpepgUsegAttrMap, nil
