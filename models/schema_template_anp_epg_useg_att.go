@@ -6,7 +6,7 @@ type SchemaTemplateAnpEpgUsegAttr struct {
 	Value map[string]interface{} `json:",omitempty"`
 }
 
-func NewSchemaTemplateAnpEpgUsegAttr(ops, path string, selectorMap map[string]interface{}) *SchemaTemplateAnpEpgSelector {
+func NewSchemaTemplateAnpEpgUsegAttr(ops, path string, selectorMap map[string]interface{}) *SchemaTemplateAnpEpgUsegAttr {
 	var temp map[string]interface{}
 
 	if ops != "remove" {
@@ -15,7 +15,7 @@ func NewSchemaTemplateAnpEpgUsegAttr(ops, path string, selectorMap map[string]in
 		temp = nil
 	}
 
-	return &SchemaTemplateAnpEpgSelector{
+	return &SchemaTemplateAnpEpgUsegAttr{
 		Ops:   ops,
 		Path:  path,
 		Value: temp,
