@@ -9,11 +9,14 @@ type SchemaSiteVrfRegion struct {
 func NewSchemaSiteVrfRegion(ops, path, name string, vpnGateway, hubNetwork bool, hubNetworkMap map[string]interface{}, cidrs []interface{}) *SchemaSiteVrfRegion {
 	var siteVrfRegionMap map[string]interface{}
 	siteVrfRegionMap = map[string]interface{}{
-		"name":                              name,
-		"isVpnGatewayRouter":                vpnGateway,
-		"isTGWAttachment":                   hubNetwork,
-		"cloudRsCtxProfileToGatewayRouterP": hubNetworkMap,
-		"cidrs":                             cidrs,
+		"name":               name,
+		"isVpnGatewayRouter": vpnGateway,
+		"isTGWAttachment":    hubNetwork,
+		"cidrs":              cidrs,
+	}
+
+	if hubNetwork {
+		siteVrfRegionMap["cloudRsCtxProfileToGatewayRouterP"] = hubNetworkMap
 	}
 
 	return &SchemaSiteVrfRegion{
