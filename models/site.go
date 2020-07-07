@@ -16,6 +16,8 @@ type SiteAttributes struct {
 	Platform        string        `json:",omitempty"`
 	CloudProviders  []interface{} `json:",omitempty"`
 	MaintenanceMode bool          `json:",omitempty"`
+	Domain          string        `json:",omitempty"`
+	HasDomain       bool          `json:",omitempty"`
 }
 
 func NewSite(siteAttr SiteAttributes) *SiteAttributes {
@@ -36,6 +38,8 @@ func (siteAttributes *SiteAttributes) ToMap() (map[string]interface{}, error) {
 	A(siteAttributeMap, "platform", siteAttributes.Platform)
 	A(siteAttributeMap, "cloudProviders", siteAttributes.CloudProviders)
 	A(siteAttributeMap, "maintenanceMode", siteAttributes.MaintenanceMode)
+	A(siteAttributeMap, "domain", siteAttributes.Domain)
+	A(siteAttributeMap, "hasDomain", siteAttributes.HasDomain)
 
 	return siteAttributeMap, nil
 }
