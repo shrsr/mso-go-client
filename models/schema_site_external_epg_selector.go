@@ -6,7 +6,21 @@ type SchemaSiteExternalEpgSelector struct {
 	Value map[string]interface{} `json:",omitempty"`
 }
 
-func NewSchemaSiteExternalEpfSelector(ops, path string, selectorMap map[string]interface{}) *SchemaSiteExternalEpgSelector {
+type SchemaSiteExternalEpg struct {
+	Ops   string                 `json:",omitempty"`
+	Path  string                 `json:",omitempty"`
+	Value map[string]interface{} `json:",omitempty"`
+}
+
+func NewSchemaSiteExternalEpg(ops, path string, epgMap map[string]interface{}) *SchemaSiteExternalEpg {
+	return &SchemaSiteExternalEpg{
+		Ops:   ops,
+		Path:  path,
+		Value: epgMap,
+	}
+}
+
+func NewSchemaSiteExternalEpgSelector(ops, path string, selectorMap map[string]interface{}) *SchemaSiteExternalEpgSelector {
 	var temp map[string]interface{}
 
 	if ops != "remove" {
@@ -32,4 +46,16 @@ func (schemaSiteExternalEpgSelector *SchemaSiteExternalEpgSelector) ToMap() (map
 	}
 
 	return schemaSiteExternalEpgSelectorMap, nil
+}
+
+func (schemaSiteExternalEpg *SchemaSiteExternalEpg) ToMap() (map[string]interface{}, error) {
+	schemaSiteExternalEpgMap := make(map[string]interface{})
+
+	A(schemaSiteExternalEpgMap, "op", schemaSiteExternalEpg.Ops)
+	A(schemaSiteExternalEpgMap, "path", schemaSiteExternalEpg.Path)
+	if schemaSiteExternalEpg.Value != nil {
+		A(schemaSiteExternalEpgMap, "value", schemaSiteExternalEpg.Value)
+	}
+
+	return schemaSiteExternalEpgMap, nil
 }
