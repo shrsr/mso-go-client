@@ -20,7 +20,7 @@ func NewSchemaSiteExternalEpg(ops, path string, epgMap map[string]interface{}) *
 	}
 }
 
-func NewTemplateExternalepg(ops, path, name, displayName, externalEpgType string, preferredGroup bool, vrfRef map[string]interface{}, l3outRef map[string]interface{}, anpRef map[string]interface{}) *TemplateExternalepg {
+func NewTemplateExternalepg(ops, path, name, displayName, externalEpgType string, preferredGroup bool, vrfRef map[string]interface{}, l3outRef map[string]interface{}, anpRef map[string]interface{}, selector []interface{}) *TemplateExternalepg {
 	var externalepgMap map[string]interface{}
 	externalepgMap = map[string]interface{}{
 		"name":           name,
@@ -36,6 +36,10 @@ func NewTemplateExternalepg(ops, path, name, displayName, externalEpgType string
 
 	if anpRef != nil {
 		externalepgMap["anpRef"] = anpRef
+	}
+
+	if selector != nil {
+		externalepgMap["selectors"] = selector
 	}
 
 	return &TemplateExternalepg{
