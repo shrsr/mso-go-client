@@ -14,9 +14,11 @@ type SiteContractServiceGraph struct {
 
 func NewTemplateContractServiceGraph(ops, path string, serviceGraph map[string]interface{}, nodeRelation []interface{}) *TemplateExternalepg {
 	var serviceGraphMap map[string]interface{}
-	serviceGraphMap = map[string]interface{}{
-		"serviceGraphRef":          serviceGraph,
-		"serviceNodesRelationship": nodeRelation,
+	if ops != "remove" {
+		serviceGraphMap = map[string]interface{}{
+			"serviceGraphRef":          serviceGraph,
+			"serviceNodesRelationship": nodeRelation,
+		}
 	}
 
 	return &TemplateExternalepg{
@@ -28,9 +30,11 @@ func NewTemplateContractServiceGraph(ops, path string, serviceGraph map[string]i
 
 func NewSiteContractServiceGraph(ops, path string, serviceGraph map[string]interface{}, nodeRelation []interface{}) *TemplateExternalepg {
 	var serviceGraphMap map[string]interface{}
-	serviceGraphMap = map[string]interface{}{
-		"serviceGraphRef":          serviceGraph,
-		"serviceNodesRelationship": nodeRelation,
+	if ops != "remove" {
+		serviceGraphMap = map[string]interface{}{
+			"serviceGraphRef":          serviceGraph,
+			"serviceNodesRelationship": nodeRelation,
+		}
 	}
 
 	return &TemplateExternalepg{
