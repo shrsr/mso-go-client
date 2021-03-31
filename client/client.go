@@ -32,6 +32,7 @@ type Client struct {
 	insecure   bool
 	proxyUrl   string
 	domain     string
+	platform   string
 }
 
 // singleton implementation of a client
@@ -57,8 +58,13 @@ func ProxyUrl(pUrl string) Option {
 	}
 }
 func Domain(domain string) Option {
-	return func(clinet *Client) {
-		clinet.domain = domain
+	return func(client *Client) {
+		client.domain = domain
+	}
+}
+func Platform(platform string) Option {
+	return func(client *Client) {
+		client.platform = platform
 	}
 }
 func initClient(clientUrl, username string, options ...Option) *Client {
@@ -164,13 +170,21 @@ func (c *Client) MakeRestRequest(method string, path string, body *container.Con
 func (c *Client) Authenticate() error {
 	method := "POST"
 	path := "/api/v1/auth/login"
+	if c.platform == "nd" {
+		c.domain = "url"
+	}
 	body, err := container.ParseJSON([]byte(fmt.Sprintf(authPayload, c.username, c.password)))
 	if c.domain != "" {
-		domainId, err := c.GetDomainId(c.domain)
-		if err != nil {
-			return err
+
+		if c.platform == "nd" {
+			body.Set(c.domain, "domain")
+		} else {
+			domainId, err := c.GetDomainId(c.domain)
+			if err != nil {
+				return err
+			}
+			body.Set(domainId, "domainId")
 		}
-		body.Set(domainId, "domainId")
 	}
 	if err != nil {
 		return err
