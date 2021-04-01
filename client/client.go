@@ -171,7 +171,7 @@ func (c *Client) Authenticate() error {
 	method := "POST"
 	path := "/api/v1/auth/login"
 	if c.platform == "nd" {
-		c.domain = "url"
+		c.domain = "local"
 	}
 	body, err := container.ParseJSON([]byte(fmt.Sprintf(authPayload, c.username, c.password)))
 	if c.domain != "" {
