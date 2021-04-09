@@ -178,7 +178,8 @@ func (c *Client) Authenticate() error {
 
 		if c.platform == "nd" {
 			body.Set(c.domain, "domain")
-		} else {
+		}
+		else {
 			domainId, err := c.GetDomainId(c.domain)
 			if err != nil {
 				return err
