@@ -276,6 +276,8 @@ func (c *Client) Do(req *http.Request) (*container.Container, *http.Response, er
 		}
 		log.Printf("[DEBUG] Exit from do method")
 		return obj, resp, err
+	} else if resp.StatusCode == 204 {
+		return nil, nil, nil
 	} else {
 		return nil, resp, err
 	}
