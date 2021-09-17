@@ -29,6 +29,10 @@ func (c *Client) GetViaURL(endpoint string) (*container.Container, error) {
 
 }
 
+func (c *Client) GetPlatform() string {
+	return c.platform
+}
+
 func (c *Client) Put(endpoint string, obj models.Model) (*container.Container, error) {
 	jsonPayload, err := c.PrepareModel(obj)
 
@@ -92,7 +96,7 @@ func (c *Client) DeletebyId(url string) error {
 	if err1 != nil {
 		return err1
 	}
-	if resp.StatusCode == 204 {
+	if resp.StatusCode == 204 || resp.StatusCode == 200 {
 		return nil
 	} else {
 		return fmt.Errorf("Unable to delete the object")
