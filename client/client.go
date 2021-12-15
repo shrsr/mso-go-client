@@ -181,15 +181,16 @@ func (c *Client) MakeRestRequest(method string, path string, body *container.Con
 func (c *Client) Authenticate() error {
 	method := "POST"
 	path := "/api/v1/auth/login"
+	var authPayload string
 
 	if c.platform == "nd" {
-		authPayload := ndAuthPayload
+		authPayload = ndAuthPayload
 		if c.domain == "" {
 			c.domain = "DefaultAuth"
 		}
 		path = "/login"
 	} else {
-		authPayload := msoAuthPayload
+		authPayload = msoAuthPayload
 	}
 	body, err := container.ParseJSON([]byte(fmt.Sprintf(authPayload, c.username, c.password)))
 	if err != nil {
