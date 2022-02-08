@@ -30,7 +30,23 @@ func NewTemplateBD(ops, path, name, displayName, layer2Unicast, unkMcastAct, mul
 		bdMap["l2UnknownUnicast"] = "flood"
 	}
 
-	if bdMap["dhcpLabel"] == nil {
+	if bdMap["unkMcastAct"] == "optimized_flooding" {
+		bdMap["unkMcastAct"] = "opt-flood"
+	} else {
+		bdMap["unkMcastAct"] = "flood"
+	}
+
+	if bdMap["multiDstPktAct"] == "flood_in_bd" || bdMap["multiDstPktAct"] == "" {
+		bdMap["multiDstPktAct"] = "bd-flood"
+	}
+
+	if bdMap["v6unkMcastAct"] == "optimized_flooding" {
+		bdMap["v6unkMcastAct"] = "opt-flood"
+	} else {
+		bdMap["v6unkMcastAct"] = "flood"
+	}
+
+	if len(dhcpLabel) == 0 {
 		delete(bdMap, "dhcpLabel")
 	}
 
