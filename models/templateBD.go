@@ -6,24 +6,24 @@ type TemplateBD struct {
 	Value map[string]interface{} `json:",omitempty"`
 }
 
-func NewTemplateBD(ops, path, name, displayName, layer2Unicast, unknownMulticastFlooding, multiDestinationFlooding, ipv6UnknownMulticastFlooding, virtualMacAddress string, intersiteBumTrafficAllow, optimizeWanBandwidth, l2Stretch, l3MCast, arpFlooding, unicastRouting bool, vrfRef, dhcpLabel map[string]interface{}) *TemplateBD {
+func NewTemplateBD(ops, path, name, displayName, layer2Unicast, unkMcastAct, multiDstPktAct, v6unkMcastAct, vmac string, intersiteBumTrafficAllow, optimizeWanBandwidth, l2Stretch, l3MCast, arpFlood, unicastRouting bool, vrfRef, dhcpLabel map[string]interface{}) *TemplateBD {
 	var bdMap map[string]interface{}
 	bdMap = map[string]interface{}{
-		"name":                         name,
-		"displayName":                  displayName,
-		"l2UnknownUnicast":             layer2Unicast,
-		"unknownMulticastFlooding":     unknownMulticastFlooding,
-		"multiDestinationFlooding":     multiDestinationFlooding,
-		"ipv6UnknownMulticastFlooding": ipv6UnknownMulticastFlooding,
-		"virtualMacAddress":            virtualMacAddress,
-		"arpFlooding":                  arpFlooding,
-		"unicastRouting":               unicastRouting,
-		"intersiteBumTrafficAllow":     intersiteBumTrafficAllow,
-		"optimizeWanBandwidth":         optimizeWanBandwidth,
-		"l2Stretch":                    l2Stretch,
-		"l3MCast":                      l3MCast,
-		"vrfRef":                       vrfRef,
-		"dhcpLabel":                    dhcpLabel,
+		"name":                     name,
+		"displayName":              displayName,
+		"l2UnknownUnicast":         layer2Unicast,
+		"unkMcastAct":              unkMcastAct,
+		"multiDstPktAct":           multiDstPktAct,
+		"v6unkMcastAct":            v6unkMcastAct,
+		"vmac":                     vmac,
+		"arpFlood":                 arpFlood,
+		"unicastRouting":           unicastRouting,
+		"intersiteBumTrafficAllow": intersiteBumTrafficAllow,
+		"optimizeWanBandwidth":     optimizeWanBandwidth,
+		"l2Stretch":                l2Stretch,
+		"l3MCast":                  l3MCast,
+		"vrfRef":                   vrfRef,
+		"dhcpLabel":                dhcpLabel,
 	}
 
 	if bdMap["l2UnknownUnicast"] == "" {
