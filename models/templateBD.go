@@ -41,6 +41,10 @@ func NewTemplateBD(ops, path, name, displayName, layer2Unicast, unkMcastAct, mul
 		bdMap["multiDstPktAct"] = "bd-flood"
 	}
 
+	if bdMap["multiDstPktAct"] == "flood_in_encap" {
+		bdMap["multiDstPktAct"] = "encap-flood"
+	}
+
 	if bdMap["v6unkMcastAct"] == "optimized_flooding" {
 		bdMap["v6unkMcastAct"] = "opt-flood"
 	} else {
