@@ -24,6 +24,7 @@ func NewTemplateBD(ops, path, name, displayName, layer2Unicast, unkMcastAct, mul
 		"l3MCast":                  l3MCast,
 		"vrfRef":                   vrfRef,
 		"dhcpLabel":                dhcpLabel,
+		"subnets":                  []interface{}{},
 	}
 
 	if bdMap["l2UnknownUnicast"] == "" {
