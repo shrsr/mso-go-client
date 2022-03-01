@@ -10,6 +10,7 @@ func NewSchemaSiteAnpEpg(ops, path string, privateLinkLabel, epgRef map[string]i
 	var siteAnpEpgMap map[string]interface{}
 	siteAnpEpgMap = map[string]interface{}{
 		"epgRef":             epgRef,
+		"privateLinkLabel":   privateLinkLabel,
 		"domainAssociations": []interface{}{},
 		"staticPorts":        []interface{}{},
 		"contracts":          []interface{}{},
@@ -17,7 +18,6 @@ func NewSchemaSiteAnpEpg(ops, path string, privateLinkLabel, epgRef map[string]i
 		"uSegAttrs":          []interface{}{},
 		"subnets":            []interface{}{},
 		"selectors":          []interface{}{},
-		"privateLinkLabel":   privateLinkLabel,
 	}
 
 	return &SchemaSiteAnpEpg{
