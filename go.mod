@@ -1,4 +1,4 @@
-module github.com/ciscoecosystem/aci-go-client
+module github.com/ciscoecosystem/mso-go-client
 
 go 1.12
 
