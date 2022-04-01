@@ -65,6 +65,7 @@ func NewSchema(id, displayName, templateName, tenantId string, template []interf
 			Value: result,
 		}
 	}
+	return result
 }
 
 func (schema *Schema) ToMap() (map[string]interface{}, error) {
