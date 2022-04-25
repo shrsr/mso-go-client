@@ -45,10 +45,6 @@ func NewSchema(id, displayName, templateName, tenantId string, template []interf
 		Templates:   result,
 		Sites:       []map[string]interface{}{},
 	}
-<<<<<<< HEAD
-	return result
-=======
->>>>>>> Removed mergeMap function
 }
 
 func (schema *Schema) ToMap() (map[string]interface{}, error) {
