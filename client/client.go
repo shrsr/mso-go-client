@@ -174,7 +174,7 @@ func (c *Client) MakeRestRequest(method string, path string, body *container.Con
 		return nil, err
 	}
 	req.Header.Set("Content-Type", "application/json")
-	log.Printf("HTTP request %s %s", method, path)
+	log.Printf("[DEBUG] HTTP request %s %s", method, path)
 
 	if authenticated {
 
@@ -183,7 +183,7 @@ func (c *Client) MakeRestRequest(method string, path string, body *container.Con
 			return req, err
 		}
 	}
-	log.Printf("HTTP request after injection %s %s", method, path)
+	log.Printf("[DEBUG] HTTP request after injection %s %s", method, path)
 
 	return req, nil
 }
@@ -301,12 +301,13 @@ func (c *Client) Do(req *http.Request) (*container.Container, *http.Response, er
 	if err != nil {
 		return nil, nil, err
 	}
-	log.Printf("nHTTP Response: %d %s %v", resp.StatusCode, resp.Status, resp)
+	log.Printf("[DEBUG] HTTP Request: %s %s", req.Method, req.URL.String())
+	log.Printf("[DEBUG] HTTP Response: %d %s %v", resp.StatusCode, resp.Status, resp)
 
 	bodyBytes, err := ioutil.ReadAll(resp.Body)
 	bodyStr := string(bodyBytes)
 	resp.Body.Close()
-	log.Printf("\n HTTP response unique string %s %s %s", req.Method, req.URL.String(), bodyStr)
+	log.Printf("[DEBUG] HTTP response unique string %s %s %s", req.Method, req.URL.String(), bodyStr)
 	if req.Method != "DELETE" && resp.StatusCode != 204 {
 		obj, err := container.ParseJSON(bodyBytes)
 
