@@ -2,7 +2,6 @@ package client
 
 import (
 	"fmt"
-	"sync"
 
 	"github.com/ciscoecosystem/mso-go-client/models"
 )

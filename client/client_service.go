@@ -45,7 +45,9 @@ func (c *Client) Put(endpoint string, obj models.Model) (*container.Container, e
 		return nil, err
 	}
 
+	c.Mutex.Lock()
 	cont, _, err := c.Do(req)
+	c.Mutex.Unlock()
 	if err != nil {
 		return nil, err
 	}
@@ -132,7 +134,9 @@ func (c *Client) PatchbyID(endpoint string, objList ...models.Model) (*container
 		return nil, err
 	}
 
+	c.Mutex.Lock()
 	cont, _, err := c.Do(req)
+	c.Mutex.Unlock()
 	if err != nil {
 		return nil, err
 	}
