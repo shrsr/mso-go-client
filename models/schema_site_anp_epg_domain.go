@@ -10,7 +10,8 @@ func NewSchemaSiteAnpEpgDomain(ops, path, domainType, dn, deploymentImmediacy, r
 	siteAnpEpgDomainMap := map[string]interface{}{
 		"domainType":          domainType,
 		"dn":                  dn,
-		"deploymentImmediacy": deploymentImmediacy,
+		"deploymentImmediacy": deploymentImmediacy, // keeping for backworths compatibility
+		"deployImmediacy":     deploymentImmediacy, // rename of deploymentImmediacy
 		"resolutionImmediacy": resolutionImmediacy,
 		"vmmDomainProperties": vmmDomainProperties,
 	}
