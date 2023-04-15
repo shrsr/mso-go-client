@@ -35,9 +35,6 @@ func injectVmmDomainProperties(siteAnpEpgDomainMap, vmmDomainProperties map[stri
 		value, exists := vmmDomainProperties[property]
 		if exists {
 			siteAnpEpgDomainMap[property] = value
-			if property == "epgLagPol" {
-				siteAnpEpgDomainMap["lacpPolicy"] = value.(map[string]interface{})["enhancedLagPol"].(map[string]interface{})["dn"]
-			}
 		}
 	}
 }
