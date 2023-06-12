@@ -7,8 +7,7 @@ type SiteBd struct {
 }
 
 func NewSchemaSiteBd(ops, path, mac string, anpRef map[string]interface{}, host bool) *SiteBd {
-	var externalepgMap map[string]interface{}
-	externalepgMap = map[string]interface{}{
+	siteBdMap := map[string]interface{}{
 		"bdRef":            anpRef,
 		"hostBasedRouting": host,
 		"mac":              mac,
@@ -17,7 +16,7 @@ func NewSchemaSiteBd(ops, path, mac string, anpRef map[string]interface{}, host 
 	return &SiteBd{
 		Ops:   ops,
 		Path:  path,
-		Value: externalepgMap,
+		Value: siteBdMap,
 	}
 
 }
