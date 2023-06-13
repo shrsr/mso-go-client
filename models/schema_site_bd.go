@@ -10,7 +10,10 @@ func NewSchemaSiteBd(ops, path, mac string, anpRef map[string]interface{}, host 
 	siteBdMap := map[string]interface{}{
 		"bdRef":            anpRef,
 		"hostBasedRouting": host,
-		"mac":              mac,
+	}
+
+	if mac != "" {
+		siteBdMap["mac"] = mac
 	}
 
 	return &SiteBd{
