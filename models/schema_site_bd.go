@@ -6,9 +6,9 @@ type SiteBd struct {
 	Value map[string]interface{} `json:",omitempty"`
 }
 
-func NewSchemaSiteBd(ops, path, mac string, anpRef map[string]interface{}, host bool) *SiteBd {
+func NewSchemaSiteBd(ops, path, mac string, bdRef map[string]interface{}, host bool) *SiteBd {
 	siteBdMap := map[string]interface{}{
-		"bdRef":            anpRef,
+		"bdRef":            bdRef,
 		"hostBasedRouting": host,
 	}
 
