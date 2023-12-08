@@ -1,6 +1,6 @@
 package models
 
-func NewTemplateContractFilterRelationShip(ops, path, action, priority string, filterRef map[string]interface{}, directives []interface{}) *PatchPayload {
+func NewTemplateContractFilterRelationShip(ops, path, action, priority, desc string, filterRef map[string]interface{}, directives []interface{}) *PatchPayload {
 
 	filterMap := map[string]interface{}{
 		"filterRef": filterRef,
@@ -16,6 +16,10 @@ func NewTemplateContractFilterRelationShip(ops, path, action, priority string, f
 
 	if priority != "" {
 		filterMap["priorityOverride"] = priority
+	}
+
+	if desc != "" {
+		filterMap["description"] = desc
 	}
 
 	return &PatchPayload{
