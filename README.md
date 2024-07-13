@@ -1,5 +1,5 @@
 # mso-go-client
- This repository contains the golang client SDK to interact with Cisco MSO/NDO using REST API calls. This SDK is used by [terraform-provider-mso](https://github.com/ciscoecosystem/terraform-provider-mso).
+ This repository contains the golang client SDK to interact with Cisco MSO/NDO using REST API calls. This SDK is used by [terraform-provider-mso](https://github.com/CiscoDevNet/terraform-provider-mso).
 
 ## Installation ##
 
