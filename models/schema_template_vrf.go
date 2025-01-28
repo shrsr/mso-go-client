@@ -18,10 +18,12 @@ func NewSchemaTemplateVrf(ops, path, Name, displayName, ipDataPlaneLearning, des
 			"vzAnyEnabled":                   vzany,
 			"preferredGroup":                 preferredGroup,
 			"siteAwarePolicyEnforcementMode": siteAwarePolicyEnforcementMode,
-			"rpConfigs":                      rendezvousPoints,
 		}
 		if ipDataPlaneLearning != "" {
 			VrfMap["ipDataPlaneLearning"] = ipDataPlaneLearning
+		}
+		if rendezvousPoints != nil {
+			VrfMap["rpConfigs"] = rendezvousPoints
 		}
 	} else {
 		VrfMap = nil
