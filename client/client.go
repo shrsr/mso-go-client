@@ -494,7 +494,7 @@ func (c *Client) backoff(attempts int) bool {
 	}
 	backoff = (rand.Float64()/2+0.5)*(backoff-min) + min
 	backoffDuration := time.Duration(backoff)
-	log.Printf("[TRACE] Starting sleeping for %v", backoffDuration.Round(time.Second))
+	log.Printf("[TRACE] Start sleeping for %v seconds", backoffDuration.Round(time.Second))
 	time.Sleep(backoffDuration)
 	log.Printf("[DEBUG] Exit from backoff method with return value true")
 	return true
