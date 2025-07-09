@@ -451,7 +451,7 @@ func (c *Client) DoWithRetryFunc(req *http.Request, retryFunc CallbackRetryFunc)
 				} else {
 					// If JSON parsed successfully and retryFunc does not indicate a retry,
 					// then this is a successful operation.
-					log.Printf("[DEBUG] Exit from Do method (2xx success, no custom retry)")
+					log.Printf("[DEBUG] Exit from Do method")
 					return obj, resp, nil
 				}
 			}
@@ -467,9 +467,17 @@ func (c *Client) DoWithRetryFunc(req *http.Request, retryFunc CallbackRetryFunc)
 		if retry {
 			log.Printf("[ERROR] HTTP Request failed with status code %d, retrying...", resp.StatusCode)
 			if ok := c.backoff(attempts); !ok {
-				log.Printf("[ERROR] HTTP Request failed with status code %d, retries exhausted", resp.StatusCode)
-				log.Printf("[DEBUG] Exit from Do method")
-				return nil, resp, fmt.Errorf("[ERROR] HTTP Request failed with status code %d after %d attempts", resp.StatusCode, attempts)
+				if resp.StatusCode >= 200 && resp.StatusCode < 300 {
+					obj, err := container.ParseJSON(bodyBytes)
+					if err != nil {
+						return nil, resp, fmt.Errorf("[ERROR] Error occurred while JSON parsing (2xx status): %+v", err)
+					}
+					return obj, resp, nil
+				} else {
+					log.Printf("[ERROR] HTTP Request failed with status code %d, retries exhausted", resp.StatusCode)
+					log.Printf("[DEBUG] Exit from Do method")
+					return nil, resp, fmt.Errorf("[ERROR] HTTP Request failed with status code %d after %d attempts", resp.StatusCode, attempts)
+				}
 			} else {
 				log.Printf("[DEBUG] Retrying HTTP Request after backoff")
 				continue
